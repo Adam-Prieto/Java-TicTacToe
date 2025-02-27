@@ -26,7 +26,7 @@ public class Main {
             System.out.println("\nPlay again? (Y/N): ");
             playAgain = userInput.next().charAt(0);
             playAgain = Character.toUpperCase(playAgain);
-        } while (playAgain == 'Y');
+        } while (playAgain == 'Y'); // End do while
 
         System.out.println("Have a nice day!");
     } // End main
@@ -35,11 +35,11 @@ public class Main {
     {
         boolean isNextTurn;
 
-        resetBoard(board);
-        showBoard(board);
+        Board.resetBoard(board);
+        Board.showBoard(board);
         isNextTurn=whoGoesFirst(board);
-        showBoard(board);
 
+        Board.showBoard(board);
         int moveNumber;
         for(moveNumber = 0; moveNumber < 8; moveNumber++)
         {
@@ -48,16 +48,16 @@ public class Main {
                 ComputerPlayer.computerMove(board);
 
                 isNextTurn = false;
-            }//end if
+            } // End if
             else
             {
                 playerMove(board);
                 isNextTurn=true;
-            }//end else
-            showBoard(board);
+            } // End else
+            Board.showBoard(board);
             if (WinnerChecker.checkWinner(board))
                 break;
-        }//end for
+        } // End for
 
         if(moveNumber == 8)
             System.out.print("Draw");
@@ -76,7 +76,7 @@ public class Main {
             variable = 2;
 
         return variable;
-    }//end conversionFunction
+    } // End conversionFunction
 
 //****************************************************************************
 
@@ -86,23 +86,17 @@ public class Main {
                 " first \nand column number second.");
         char moveNumber1 = userInput.next().charAt(0);
 
-        //validate input
+        // Validate input
         while(moveNumber1 < '0' || moveNumber1 > '2')
         {
             System.out.println("Invalid input \nPlease make sure that the" +
                     " space you want to move is empty.\n");
             moveNumber1=userInput.next().charAt(0);
-        }//end while
+        } // End while
 
         char moveNumber2=userInput.next().charAt(0);
-        while(moveNumber2<'0' && moveNumber2>'2')
-        {
-            System.out.println("Invalid input \nPlease make sure that the" +
-                    " space you want to move is empty.");
-            moveNumber2=userInput.next().charAt(0);
-        }//end of while
 
-        //make sure the spot is empty
+        // Make sure the spot is empty
         while(!(game[conversionFunction(moveNumber1)][conversionFunction(moveNumber2)]
                         ==" "))
         {
@@ -116,7 +110,7 @@ public class Main {
                 System.out.println("Invalid input \nPlease make sure that the" +
                         " space you want to move is empty.");
                 moveNumber1=userInput.next().charAt(0);
-            }//end inner while
+            } // End inner while
 
             moveNumber2=userInput.next().charAt(0);
 
@@ -125,11 +119,11 @@ public class Main {
                 System.out.println("Invalid input \nPlease make sure that the" +
                         " space you want to move is empty.");
                 moveNumber2=userInput.next().charAt(0);
-            }//end second inner while
-        }//end while
+            } // End second inner while
+        } // End while
         game[conversionFunction(moveNumber1)][conversionFunction(moveNumber2)]
                 = "X";
-    }//end playerMove
+    } //End playerMove
 
 //****************************************************************************
 
@@ -147,7 +141,7 @@ public class Main {
             playerMovesFirst = true;
             System.out.println("You will go first.");
             playerMove(game);
-        }//end if
+        } // End if
         else
         {
             playerMovesFirst=false;
@@ -156,39 +150,5 @@ public class Main {
         } // End else
 
         return playerMovesFirst;
-    }//end whoGoesFirst
-
-//****************************************************************************
-
-    public static void showBoard(String[][] board2)
-    {
-        System.out.println("   0   1   2"); // column numbers
-
-        // First row
-        System.out.println("0  " + board2[0][0] + " | " + board2[0][1] + " | "
-                + board2[0][2]);
-
-        System.out.println("  ---+---+---"); //horizontal separator
-
-        // Second row
-        System.out.println("1  " + board2[1][0] + " | " + board2[1][1] + " | "
-                + board2[1][2]);
-
-
-        System.out.println("  ---+---+---"); // horizontal separator
-
-        // Third row
-        System.out.println("2  " + board2[2][0] + " | " + board2[2][1] +
-                " | " + board2[2][2] + "\n");
-    } // End showBoard
-
-//****************************************************************************
-
-    public static void resetBoard(String[][] workingBoard)
-    {
-        for (int i = 0; i < workingBoard.length; i++)
-            for (int j = 0; j < workingBoard.length; j++)
-                workingBoard[i][j] = " ";
-    } // End resetBoard
-
+    } // End whoGoesFirst
 } // End Main
